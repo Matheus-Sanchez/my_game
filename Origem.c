@@ -14,22 +14,26 @@
 #define Altura_t  480
 //cada pixel do jogo vale 4X4 pixeis da tela 1920x1080
 int pos_x, pos_y;
-pos_x = Largura_t ;
-pos_y = Altura_t ;
+pos_x = Largura_t;
+pos_y = Altura_t;
 enum TECLAS { CIMA, BAIXO, DIREITA, ESQUERDA };
 bool teclas[4] = { false, false, false, false };
 int fps = 60;
 bool fim = false;
+int fase = 0;
+
+
+
 
 void IniciarAllegro()
 {
     ALLEGRO_DISPLAY* display = NULL;
     //desenhar formas
-    al_init_primitives_addon(); 
+    al_init_primitives_addon();
     //entrada do teclado
     al_install_keyboard();
     //criação de fila e demais dispositivos
-    
+
     ALLEGRO_EVENT_QUEUE* fila_eventos = NULL;
 
     fila_eventos = al_create_event_queue();
@@ -53,7 +57,7 @@ void IniciarAllegro()
     al_start_timer(timer);
 }
 
-int IniciarDisplay()
+int IniciarDisplay(display)
 {
     if (!al_init())
     {
@@ -70,12 +74,164 @@ int IniciarDisplay()
 
 }
 
+
+//tenho que criar separado cada objeto que é interativo
+//geladeira
+//armario
+//fogao
+//forno
+//pia
+//balcao
+//batedeira
+
+
+
+void mapa()
+{
+}
+void submapa()
+{
+
+}
+//colocar ingredientes na bacia
+
+
+//colocar ingredientes no liquidificador
+
+
+//cortar
+
+
+//misturar
+
+
+//assar
+
+
+//misturar
+
+
+//abrir a massa
+
+
+//colocar recheio
+
+
+//mergulhar
+
+
+ //fritar
+
+
+ //ferver no fogão
+
+
+void minigames()
+{
+    int passo = 0;
+    do
+    {
+        switch (passo)
+            {
+                case 1:       //colocar ingredientes na bacia
+
+                    break;
+                case 2:       //colocar ingredientes no liquidificador
+
+                    break;
+                case 3:       //cortar
+
+                    break;
+                case 4:       //misturar
+
+                    break;
+                case 5:       //assar
+
+                    break;
+                case 6:       //misturar
+
+                    break;
+                case 7:       //abrir a massa
+
+                    break;
+                case 8:       //colocar recheio
+
+                    break;
+                case 9:       //mergulhar
+
+                    break;
+                case 10:       //fritar
+
+                    break;
+                case 11:       //ferver no fogão
+
+                    break;
+            }
+    } while (passo < 12);
+    
+}
+//todos vao receber as funçoes respectivas para cada receita
+void Bauru()
+{
+    // 1 bata no liquidificador (oleo, farinha, ovos, leite, sal, fermento)    
+    // 2 reserve
+    // 3 pique (tomete, cebola)
+    // 4 reserve
+    // 5 coloque metade da massa em uma forma
+    // 6 coloque o que foi picado junto com milho
+    // 7 cubra com presunto e queijo
+    // 8 despeje o resto da massa
+    // 9 asse por 40 mim no forno
+    //
+
+
+}
+void Pastel()
+{
+
+}
+void Rabanada()
+{
+
+}
+void ArrozDoce()
+{
+
+}
+
+void Fases()
+{
+    do
+    {
+        switch (fase)
+        {
+        case 1:
+            Bauru();
+            break;
+        case 2:
+            Pastel();
+            break;
+        case 3:
+            Rabanada();
+            break;
+        case 4:
+            ArrozDoce();
+            break;
+        }
+        fase++;
+    } while (fase < 5)
+    {
+
+    }
+}
+
+
 void perso()
 {
     al_draw_filled_circle(pos_x, pos_y, 50, al_map_rgb(0, 0, 255));
 }
 
-void Movimentar()
+void Movimentar(ev)
 {
     //movimentar quando presionar as teclas
     switch (ev.keyboard.keycode)
@@ -131,13 +287,25 @@ void Movimentar()
     }
 }
 
-void Finalizar()
+
+
+
+void colocar(display, fila_eventos, ev, timer)
+{
+    //pegar ingredientes com o mouse
+    //quando soutar o botao, soltar ingrediente
+
+}
+
+void Finalizar(display, fila_eventos, ev, timer)
 {
     al_destroy_display(display);
     al_destroy_event_queue(fila_eventos);
     al_destroy_timer(timer);
 }
-void jogo()
+
+
+void jogo(display, fila_eventos, ev, timer)
 {
     IniciarAllegro();
     IniciarDisplay();
@@ -169,6 +337,7 @@ void jogo()
             }
 
             al_flip_display();
+            al_clear_to_color(al_map_rgb(0, 0, 0));
         }
     }
 }
@@ -176,7 +345,7 @@ void jogo()
 
 int main()
 {
-    
+
 
 
     jogo();
@@ -184,5 +353,5 @@ int main()
 
 
 
-	return 0;
+    return 0;
 }
